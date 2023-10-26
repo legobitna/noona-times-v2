@@ -10,5 +10,5 @@
 * User can use pagenation to get more news
 
 ## API Docuemnt
-* API credit to : https://newscatcherapi.com/
+* API credit to :https://newsapi.org/docs
 
