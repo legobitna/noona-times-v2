@@ -2,7 +2,7 @@ const API_KEY = "b1fe516cb2ff4032b010ec5773f3a973";
 let articles = [];
 let page = 1;
 let totalPage = 1;
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 10;
 // let url = new URL(
 //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}`
 // );
