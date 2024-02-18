@@ -7,8 +7,7 @@ const PAGE_SIZE = 100;
 //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}`
 // );
 let url = new URL(
-  `https://noona-times-v2.netlify.app/top-headlines
-  ?country=kr&pageSize=${PAGE_SIZE}`
+  `https://noona-times-v2.netlify.app/top-headlines?country=kr&pageSize=${PAGE_SIZE}`
 );
 let menus = document.querySelectorAll("#menu-list button");
 menus.forEach((menu) =>
@@ -18,6 +17,7 @@ menus.forEach((menu) =>
 const getNews = async () => {
   try {
     url.searchParams.set("page", page);
+    console.log("Rrr", url);
     let response = await fetch(url);
     let data = await response.json();
     if (response.status == 200) {
