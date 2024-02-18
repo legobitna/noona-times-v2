@@ -7,7 +7,7 @@ const PAGE_SIZE = 100;
 //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}`
 // );
 let url = new URL(
-  `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines
+  `https://noona-times-v2.netlify.app/top-headlines
   ?country=kr&pageSize=${PAGE_SIZE}`
 );
 let menus = document.querySelectorAll("#menu-list button");
@@ -52,7 +52,7 @@ const getLatestNews = () => {
   //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   // );
   url = new URL(
-    `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+    `https://noona-times-v2.netlify.app/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   );
   getNews();
 };
@@ -65,7 +65,7 @@ const getNewsByTopic = (event) => {
   //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
   // );
   url = new URL(
-    `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
+    `https://noona-times-v2.netlify.app/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
   );
   getNews();
 };
@@ -87,7 +87,7 @@ const getNewsByKeyword = () => {
   //   `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   // );
   url = new URL(
-    `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?q=${keyword}&country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+    `https://noona-times-v2.netlify.app/top-headlines?q=${keyword}&country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   );
   getNews();
 };
