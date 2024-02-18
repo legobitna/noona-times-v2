@@ -2,9 +2,13 @@ const API_KEY = "b1fe516cb2ff4032b010ec5773f3a973";
 let articles = [];
 let page = 1;
 let totalPage = 1;
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 100;
+// let url = new URL(
+//   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}`
+// );
 let url = new URL(
-  `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}`
+  `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines
+  ?country=kr&pageSize=${PAGE_SIZE}`
 );
 let menus = document.querySelectorAll("#menu-list button");
 menus.forEach((menu) =>
@@ -17,6 +21,7 @@ const getNews = async () => {
     let response = await fetch(url);
     let data = await response.json();
     if (response.status == 200) {
+      console.log("resutl", data);
       if (data.totalResults == 0) {
         page = 0;
         totalPage = 0;
@@ -43,10 +48,12 @@ const getNews = async () => {
 };
 const getLatestNews = () => {
   page = 1; // 9. 새로운거 search마다 1로 리셋
+  // url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+  // );
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+    `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   );
-
   getNews();
 };
 
@@ -54,10 +61,12 @@ const getNewsByTopic = (event) => {
   const topic = event.target.textContent.toLowerCase();
 
   page = 1;
+  // url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
+  // );
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
+    `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
   );
-
   getNews();
 };
 
@@ -74,10 +83,12 @@ const getNewsByKeyword = () => {
   const keyword = document.getElementById("search-input").value;
 
   page = 1;
+  // url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+  // );
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?q=${keyword}&country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
+    `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines?q=${keyword}&country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   );
-
   getNews();
 };
 
