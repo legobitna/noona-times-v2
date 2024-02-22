@@ -9,6 +9,6 @@
 * Website is responsive 웹사이트는 반응형 웹페이지다.
 * User can use pagenation to get more news
 
-## API Docuemnt
+## API Document
 * API credit to :https://newsapi.org/docs
 
