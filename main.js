@@ -14,14 +14,27 @@ menus.forEach((menu) =>
   menu.addEventListener("click", (e) => getNewsByTopic(e))
 );
 
+document
+  .getElementById("search-input")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      getNewsByKeyword(); // 엔터 키를 눌렀을 때 검색 실행
+      event.preventDefault(); // 폼이 실제로 제출되지 않도록 방지
+    }
+  });
+
+document.getElementById("search-input").addEventListener("focus", function () {
+  this.value = ""; // 포커스가 되었을 때 입력창 초기화
+});
+
 const getNews = async () => {
   try {
     url.searchParams.set("page", page);
-    console.log("Rrr", url);
+
     let response = await fetch(url);
     let data = await response.json();
+
     if (response.status == 200) {
-      console.log("resutl", data);
       if (data.totalResults == 0) {
         page = 0;
         totalPage = 0;
@@ -46,7 +59,7 @@ const getNews = async () => {
     renderPagination();
   }
 };
-const getLatestNews = () => {
+const getLatestNews = async () => {
   page = 1; // 9. 새로운거 search마다 1로 리셋
   // url = new URL(
   //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
@@ -54,12 +67,11 @@ const getLatestNews = () => {
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   );
-  getNews();
+  await getNews();
 };
 
-const getNewsByTopic = (event) => {
+const getNewsByTopic = async (event) => {
   const topic = event.target.textContent.toLowerCase();
-
   page = 1;
   // url = new URL(
   //   `https://newsapi.org/v2/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
@@ -67,7 +79,7 @@ const getNewsByTopic = (event) => {
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&pageSize=${PAGE_SIZE}&category=${topic}&apiKey=${API_KEY}`
   );
-  getNews();
+  await getNews();
 };
 
 const openSearchBox = () => {
@@ -79,7 +91,7 @@ const openSearchBox = () => {
   }
 };
 
-const getNewsByKeyword = () => {
+const getNewsByKeyword = async () => {
   const keyword = document.getElementById("search-input").value;
 
   page = 1;
@@ -89,7 +101,7 @@ const getNewsByKeyword = () => {
   url = new URL(
     `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}&country=kr&pageSize=${PAGE_SIZE}&apiKey=${API_KEY}`
   );
-  getNews();
+  await getNews();
 };
 
 const render = () => {
@@ -98,10 +110,9 @@ const render = () => {
       return `<div class="news row">
         <div class="col-lg-4">
             <img class="news-img"
-                src="${
-                  news.urlToImage ||
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU"
-                }" />
+              src="${news.urlToImage}"
+              onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU';" />
+
         </div>
         <div class="col-lg-8">
             <a class="title" target="_blank" href="${news.url}">${
