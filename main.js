@@ -143,7 +143,8 @@ const renderPagination = () => {
     last = totalPage;
   }
   let first = last - 4 <= 0 ? 1 : last - 4;
-  if (first >= 6) {
+  console.log("fff", first);
+  if (page > 1) {
     paginationHTML = `<li class="page-item" onclick="pageClick(1)">
                         <a class="page-link" href='#js-bottom'>&lt;&lt;</a>
                       </li>
@@ -157,7 +158,7 @@ const renderPagination = () => {
                        </li>`;
   }
 
-  if (last < totalPage) {
+  if (page < totalPage) {
     paginationHTML += `<li class="page-item" onclick="pageClick(${page + 1})">
                         <a  class="page-link" href='#js-program-detail-bottom'>&gt;</a>
                        </li>
